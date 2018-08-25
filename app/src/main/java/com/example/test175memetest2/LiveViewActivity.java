@@ -2,7 +2,10 @@ package com.example.test175memetest2;
 
 import android.content.Intent;
 import android.graphics.Matrix;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +36,10 @@ public class LiveViewActivity extends AppCompatActivity {
     private ImageView bodyImage;
     private TextView statusLabel;
     private Button connectButton;
+
+    private SoundPool soundPool;
+    private String[] audioFileNames = {"music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music.mp3"};
+    private int[] sounds = new int[5];
 
     private MemeLib memeLib;
 
@@ -66,6 +73,7 @@ public class LiveViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_view);
         init();
+        soundPool();
     }
 
     @Override
@@ -163,11 +171,35 @@ public class LiveViewActivity extends AppCompatActivity {
     private void updateMemeData(MemeRealtimeData d) {
 
         // for blink
-        Log.d("LiveViewActivity", "Blink Speed:" + d.getBlinkSpeed());
+        //Log.d("LiveViewActivity", "Blink Speed:" + d.getBlinkSpeed());
         if (d.getBlinkSpeed() > 0) {
             blinkImage.setVisibility(View.INVISIBLE);
+
             blink();
         }
+        int dataUp = d.getEyeMoveUp();
+        int dataDown = d.getEyeMoveDown();
+        int dataLeft = d.getEyeMoveLeft();
+        int dataRight = d.getEyeMoveRight();
+        float dataRoll = d.getRoll();
+        if (dataUp > 2){
+            Log.d("error1", "up");
+            soundPool.play(sounds[0], 1.0f, 1.0f, 0, 0, 1);
+        }
+        if (dataDown > 2){
+            Log.d("error1", "down");
+            soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
+        }
+        if (dataLeft > 2){
+            Log.d("error1", "left");
+            soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
+        }
+        if (dataRight > 2){
+            Log.d("error1", "right");
+            soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
+        }
+        Log.d("error1", String.valueOf(dataRoll));
+
 
         // for body (Y axis rotation)
         double radian = Math.atan2(d.getAccX(), d.getAccZ());
@@ -188,5 +220,21 @@ public class LiveViewActivity extends AppCompatActivity {
         matrix.postRotate((float)degree, width/2, height/2);
         matrix.postScale(0.5f, 0.5f);
         bodyImage.setImageMatrix(matrix);
+    }
+
+    private void soundPool(){
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setAudioAttributes(audioAttributes)
+                .setMaxStreams(2)
+                .build();
+        sounds[0] = soundPool.load(this, R.raw.music2, 1);
+        sounds[1] = soundPool.load(this, R.raw.music3, 1);
+        sounds[2] = soundPool.load(this, R.raw.music4, 1);
+        sounds[3] = soundPool.load(this, R.raw.music5, 1);
     }
 }
