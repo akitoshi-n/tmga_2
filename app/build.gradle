@@ -28,4 +28,7 @@ dependencies {
 
     compile 'com.android.support:support-annotations:27.1.1'
     compile 'com.google.code.gson:gson:2.4'
+    // 追加
+    compile project(':camerafragment')
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 }

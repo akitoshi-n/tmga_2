@@ -1,1 +1,5 @@
 include ':app'
+
+//カメラライブラリ
+include ':camerafragment'
+project(':camerafragment').projectDir = new File(settingsDir, '../Test151Compile2/camerafragment')

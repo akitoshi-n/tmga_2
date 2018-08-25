@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -18,7 +19,8 @@ import android.widget.TextView;
 public class SelectBGMActivity extends AppCompatActivity{
 
     private int currentBMG = 0;
-    private Button buttonRight, buttonLeft, buttonNext;
+    private Button buttonNext;
+    private ImageView buttonRight, buttonLeft;
     private SoundPool soundPool;
     private int[] sounds = new int[2];
     private TextView textBGM0, textBGM1, textBGM2;
