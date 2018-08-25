@@ -12,11 +12,12 @@
 
     <TextView
         android:text="ポポコ"
-        android:textSize="50dp"
+        android:textSize="54dp"
         android:id="@+id/top_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"/>
 
@@ -27,6 +28,7 @@
         android:text="遊ぶ "
         android:textColor="@color/white"
         android:textSize="30dp"
+        android:textStyle="bold"
         android:paddingTop="6dp"
         android:paddingRight="36dp"
         android:paddingLeft="40dp"
