@@ -7,9 +7,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BGMを選択"
+        android:text="楽器を選択"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+        <Button
+            android:id="@+id/button_select_kubifuri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="首振り"/>
+
+        <Button
+            android:id="@+id/button_select_sisen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="視線"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,27 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="←"/>
-
-        <TextView
-            android:id="@+id/textview_bgm_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="BGM1"/>
-
-        <TextView
-            android:id="@+id/textview_bgm_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="BGM2"/>
-
-        <TextView
-            android:id="@+id/textview_bgm_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="BGM3"/>
 
         <Button
             android:id="@+id/select_right"
