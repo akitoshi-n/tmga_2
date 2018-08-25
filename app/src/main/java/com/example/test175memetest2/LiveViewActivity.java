@@ -97,9 +97,7 @@ public class LiveViewActivity extends AppCompatActivity {
         memeLib = MemeLib.getInstance();
 
         blinkLayout = (FrameLayout)findViewById(R.id.blink_layout);
-
         blinkImage = (ImageView)findViewById(R.id.blink_image);
-
         blinkView = (VideoView)findViewById(R.id.blink_view);
         blinkView.setZOrderOnTop(true);
         blinkView.setVideoPath("android.resource://" + this.getPackageName() + "/" + R.raw.blink);
@@ -182,23 +180,38 @@ public class LiveViewActivity extends AppCompatActivity {
         int dataLeft = d.getEyeMoveLeft();
         int dataRight = d.getEyeMoveRight();
         float dataRoll = d.getRoll();
+        float dataPitch = d.getPitch();
+        float dataYaw = d.getYaw();
+        float dataAccZ = d.getAccZ();
         if (dataUp > 2){
             Log.d("error1", "up");
-            soundPool.play(sounds[0], 1.0f, 1.0f, 0, 0, 1);
+            //soundPool.play(sounds[0], 1.0f, 1.0f, 0, 0, 1);
         }
         if (dataDown > 2){
             Log.d("error1", "down");
-            soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
+            //soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
         }
         if (dataLeft > 2){
             Log.d("error1", "left");
-            soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
+            //soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
         }
         if (dataRight > 2){
             Log.d("error1", "right");
-            soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
+            //soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
         }
-        Log.d("error1", String.valueOf(dataRoll));
+        if (dataAccZ > -6.0f || dataAccZ < -26.0f){
+            soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
+        } else if (dataRoll > 40.0f || dataRoll < -40.0f){
+            soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
+        } else if (dataPitch > 40.0f || dataPitch < -40.0f){
+            soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
+        } else if (dataYaw > 40.0f || dataYaw < -40.0f){
+            soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
+        }
+
+        //Log.d("error1", "pitch: " + dataPitch);
+        //Log.d("error1", "yaw: " + dataYaw);
+        Log.d("error1", "accZ: " + dataAccZ);
 
 
         // for body (Y axis rotation)
