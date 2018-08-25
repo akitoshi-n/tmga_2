@@ -5,6 +5,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -29,11 +30,25 @@ public class SelectBGMActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_bgm_activity);
+        soundPool();
         initView();
         displayCurrentBMGText();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        soundPool();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        releaseSoundPool();
+    }
+
     private void initView(){
+        currentBMG = myPreferencesActivity.getCurrentBGM(SelectBGMActivity.this);
         buttonNext = findViewById(R.id.button_to_next);
         buttonRight = findViewById(R.id.select_right);
         buttonLeft = findViewById(R.id.select_left);
@@ -67,7 +82,6 @@ public class SelectBGMActivity extends AppCompatActivity{
                 displayCurrentBMGText();
             }
         });
-        currentBMG = myPreferencesActivity.getCurrentBGM(SelectBGMActivity.this);
         textBGM0 = findViewById(R.id.textview_bgm_0);
         textBGM1 = findViewById(R.id.textview_bgm_1);
     }
@@ -80,7 +94,7 @@ public class SelectBGMActivity extends AppCompatActivity{
                 .build();
         soundPool = new SoundPool.Builder()
                 .setAudioAttributes(audioAttributes)
-                .setMaxStreams(2)
+                .setMaxStreams(1)
                 .build();
         sounds[0] = soundPool.load(this, R.raw.tmga_drum1, 1);
         sounds[1] = soundPool.load(this, R.raw.tmga_drum2, 1);
@@ -90,11 +104,15 @@ public class SelectBGMActivity extends AppCompatActivity{
         if (currentBMG == 0){
             textBGM0.setVisibility(View.VISIBLE);
             textBGM1.setVisibility(View.GONE);
+            soundPool.play(sounds[0],  1.0f, 1.0f, 0, 0, 1);
         } else if (currentBMG == 1){
             textBGM0.setVisibility(View.GONE);
             textBGM1.setVisibility(View.VISIBLE);
+            soundPool.play(sounds[1],  1.0f, 1.0f, 0, 0, 1);
         }
     }
 
-
+    private void releaseSoundPool(){
+        soundPool.release();
+    }
 }
