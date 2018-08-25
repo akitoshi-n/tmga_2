@@ -4,45 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:src="@drawable/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BGMを選択"
+        android:text="BGMを選択 "
+        android:textColor="@color/white"
+        android:textSize="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="16dp"
+        android:drawableRight="@drawable/sax_emoji"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp">
 
-        <Button
+        <ImageView
             android:id="@+id/select_left"
+            android:src="@drawable/left_arrow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:text="←"/>
+            android:scaleType="centerInside"/>
 
         <TextView
             android:id="@+id/textview_bgm_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="サンプル1"/>
+            android:text="サンプル1"
+            android:textColor="@color/white"
+            android:textSize="28dp"/>
 
         <TextView
             android:id="@+id/textview_bgm_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="サンプル2"/>
+            android:text="サンプル2"
+            android:textColor="@color/white"
+            android:textSize="28dp"/>
 
-        <Button
+        <ImageView
             android:id="@+id/select_right"
+            android:src="@drawable/right_arrow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:text="→" />
+            android:scaleType="centerInside"/>
 
     </RelativeLayout>
 
@@ -51,8 +66,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="次へ"
+        android:textSize="24dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/frame_button_transparent_bold"/>
 
 </RelativeLayout>
