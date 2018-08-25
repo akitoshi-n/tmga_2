@@ -10,11 +10,31 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
+    <TextView
+        android:text="ポポコ"
+        android:textSize="50dp"
+        android:id="@+id/top_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"/>
+
     <Button
         android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="遊ぶ"
-        android:layout_centerInParent="true" />
+        android:text="遊ぶ "
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:paddingTop="6dp"
+        android:paddingRight="36dp"
+        android:paddingLeft="40dp"
+        android:paddingBottom="6dp"
+        android:background="@drawable/frame_button_style"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/top_title"
+        android:layout_marginTop="120dp"
+        android:drawableRight="@drawable/engel"/>
 
 </RelativeLayout>

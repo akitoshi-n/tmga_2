@@ -26,8 +26,8 @@ import com.jins_jp.meme.MemeRealtimeListener;
 public class LiveViewActivity extends AppCompatActivity {
 
     // TODO : Replace APP_ID and APP_SECRET
-    private static final String APP_ID = "";
-    private static final String APP_SECRET = "";
+    private static final String APP_ID = "993ox4vgs4s0js8moi7yst37g6ipj3mj";
+    private static final String APP_SECRET = "834048189444008";
 
     private FrameLayout blinkLayout;
     private ImageView blinkImage;
