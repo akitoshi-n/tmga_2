@@ -40,7 +40,7 @@ public class SelectBGMActivity extends AppCompatActivity{
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), LiveViewActivity.class);
+                Intent intent = new Intent(getApplication(), SelectInstrumentsActivity.class);
                 startActivity(intent);
                 myPreferencesActivity.setCurrentBGM(SelectBGMActivity.this, currentBMG);
             }
@@ -70,7 +70,6 @@ public class SelectBGMActivity extends AppCompatActivity{
         currentBMG = myPreferencesActivity.getCurrentBGM(SelectBGMActivity.this);
         textBGM0 = findViewById(R.id.textview_bgm_0);
         textBGM1 = findViewById(R.id.textview_bgm_1);
-        textBGM2 = findViewById(R.id.textview_bgm_2);
     }
 
     private void soundPool(){
@@ -91,15 +90,9 @@ public class SelectBGMActivity extends AppCompatActivity{
         if (currentBMG == 0){
             textBGM0.setVisibility(View.VISIBLE);
             textBGM1.setVisibility(View.GONE);
-            textBGM2.setVisibility(View.GONE);
         } else if (currentBMG == 1){
             textBGM0.setVisibility(View.GONE);
             textBGM1.setVisibility(View.VISIBLE);
-            textBGM2.setVisibility(View.GONE);
-        } else if (currentBMG == 2){
-            textBGM0.setVisibility(View.GONE);
-            textBGM1.setVisibility(View.GONE);
-            textBGM2.setVisibility(View.VISIBLE);
         }
     }
 

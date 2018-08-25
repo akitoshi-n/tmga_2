@@ -28,21 +28,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="BGM1"/>
+            android:text="サンプル1"/>
 
         <TextView
             android:id="@+id/textview_bgm_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="BGM2"/>
-
-        <TextView
-            android:id="@+id/textview_bgm_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="BGM3"/>
+            android:text="サンプル2"/>
 
         <Button
             android:id="@+id/select_right"

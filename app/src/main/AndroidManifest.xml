@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SelectBGMActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SelectInstrumentsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".CheckSettingsActivity" android:screenOrientation="portrait" />
         <activity android:name=".LiveViewActivity" android:screenOrientation="portrait" />
         <activity android:name=".ConnectActivity" android:screenOrientation="portrait" />
     </application>
