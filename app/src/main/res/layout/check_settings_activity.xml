@@ -3,32 +3,125 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:src="@drawable/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="160dp"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/textview_with_check_0"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BGM:   "
-            android:layout_centerHorizontal="true"/>
+            android:orientation="vertical"
+            android:gravity="right">
 
-        <TextView
-            android:id="@+id/textview_with_check_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="首振り:   "
-            android:layout_centerHorizontal="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BGM "
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:layout_marginBottom="12dp"
+                android:drawableRight="@drawable/sax_emoji"/>
 
-        <TextView
-            android:id="@+id/textview_with_check_2"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首振り"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:layout_marginBottom="12dp"
+                android:drawableRight="@drawable/question_emoji"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="視線 "
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:layout_marginRight="3dp"
+                android:drawableRight="@drawable/lens_emoji"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="視線:   "
-            android:layout_centerHorizontal="true"/>
+            android:orientation="vertical"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/bgm_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="サンプル１"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/swing_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ドラム"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/look_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ピアノ"
+                android:textColor="@color/white"
+                android:textSize="24dp" />
+
+        </LinearLayout>>
 
     </LinearLayout>
 
@@ -37,7 +130,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="演奏開始"
+        android:textSize="24dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/frame_button_transparent_bold"/>
 
 </RelativeLayout>
