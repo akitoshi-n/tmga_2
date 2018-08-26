@@ -49,13 +49,12 @@ public class LiveViewActivity extends AppCompatActivity {
     private SoundPool soundPool;
     private String[] audioFileNames = {"music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music.mp3"};
     private int[] drumMusicFileRefs = {R.raw.dram_cymbal, R.raw.dram_snare, R.raw.dram_hihat, R.raw.dram_snare};
-    //private String[] dramFileNames = {"drum_cymbal.wav", "drum_snare.wav", "drum_hihat.wav", "drum_snare.wav"}; ↑修正後
-    //private String[] waza1FileNames = {"waza_aura.mp3", "waza_punch_high.mp3", "waza_highspeed.mp3", "waza_whip_attack.mp3"};
-    //private String[] waza2FileNames = {"waza_sword_clash.mp3", "waza_knife_stab.mp3", "waza_sword_gesture.mp3", "waza_katana_slash.mp3"};
-    //private String[] specialFileNames = {"sp_shine.mp3", "sp_pocopoco.mp3", "sp_tin.mp3", "sp_touch.mp3"};
-    //private String[] pianoFileNames = {"piano1_1do.wav", "piano1_2re.wav", "piano1_3mi.wav", "piano1_4fa.wav"};
-    //private String[] guitarFileNames = {"guitar01.wav", "guitar04.wav", "guitar06.wav", "guitar09.wav"};
-    //private String[] bassFileNames = {"bass01.wav", "bass03.wav", "bass05.wav", "bass10.wav"};
+    private int[] waza1FileNames = {R.raw.waza_aura, R.raw.waza_punch_high, R.raw.waza_highspeed, R.raw.waza_whip_attack};
+    private int[] waza2FileNames = {R.raw.waza_sword_clash, R.raw.waza_knife_stab, R.raw.waza_sword_gesture, R.raw.waza_katana_slash};
+    private int[] specialFileNames = {R.raw.sp_shine, R.raw.sp_pocopoco, R.raw.sp_tin, R.raw.sp_touch};
+    private int[] pianoFileNames = {R.raw.piano1_1do, R.raw.piano1_2re, R.raw.piano1_3mi, R.raw.piano1_4fa};
+    private int[] guitarFileNames = {R.raw.guitar01, R.raw.guitar04, R.raw.guitar06, R.raw.guitar09};
+    private int[] bassFileNames = {R.raw.bass01, R.raw.bass03, R.raw.bass05, R.raw.bass10};
     private int[] sounds = new int[5];
 
     private int bgm = 0;
