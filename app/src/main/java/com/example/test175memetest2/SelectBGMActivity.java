@@ -98,8 +98,8 @@ public class SelectBGMActivity extends AppCompatActivity{
                 .setAudioAttributes(audioAttributes)
                 .setMaxStreams(1)
                 .build();
-        sounds[0] = soundPool.load(this, R.raw.tmga_drum1, 1);
-        sounds[1] = soundPool.load(this, R.raw.tmga_drum2, 1);
+        sounds[0] = soundPool.load(this, R.raw.first_highhat, 1);
+        sounds[1] = soundPool.load(this, R.raw.sakanakushon2, 1);
     }
 
     private void displayCurrentBMGText(){

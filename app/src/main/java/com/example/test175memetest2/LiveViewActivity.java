@@ -66,7 +66,7 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
-    private int[] backgroundMusicRefs = {R.raw.tmga_drum1, R.raw.tmga_drum2};
+    private int[] backgroundMusicRefs = {R.raw.first_highhat R.raw.sakanakushon2};
     private int[] backgroundMusics = new int[backgroundMusicRefs.length];
 
     private MemeLib memeLib;
