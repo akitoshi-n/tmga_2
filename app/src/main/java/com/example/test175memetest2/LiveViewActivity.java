@@ -52,13 +52,13 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private SoundPool soundPool;
     private String[] audioFileNames = {"music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music.mp3"};
-    private String[] dramFileNames = {};
-    private String[] waza1FileNames = {};
-    private String[] waza2FileNames = {};
-    private String[] specialFileNames = {};
-    private String[] pianoFileNames = {};
-    private String[] guitarFileNames = {};
-    private String[] bassFileNames = {};
+    private String[] dramFileNames = {"drum_cymbal.wav", "drum_snare.wav", "drum_hihat.wav", "drum_snare.wav"};
+    private String[] waza1FileNames = {"waza_aura.mp3", "waza_punch_high.mp3", "waza_highspeed.mp3", "waza_whip_attack.mp3"};
+    private String[] waza2FileNames = {"waza_sword_clash.mp3", "waza_knife_stab.mp3", "waza_sword_gesture.mp3", "waza_katana_slash.mp3"};
+    private String[] specialFileNames = {"sp_shine.mp3", "sp_pocopoco.mp3", "sp_tin.mp3", "sp_touch.mp3"};
+    private String[] pianoFileNames = {"piano1_1do.wav", "piano1_2re.wav", "piano1_3mi.wav", "piano1_4fa.wav"};
+    private String[] guitarFileNames = {"guitar01.wav", "guitar04.wav", "guitar06.wav", "guitar09.wav"};
+    private String[] bassFileNames = {"bass01.wav", "bass03.wav", "bass05.wav", "bass10.wav"};
     private int[] sounds = new int[5];
 
     private int bgm = 0;
