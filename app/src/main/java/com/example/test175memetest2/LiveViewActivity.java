@@ -56,6 +56,13 @@ public class LiveViewActivity extends AppCompatActivity {
     private int[] guitarFileNames = {R.raw.guitar01, R.raw.guitar04, R.raw.guitar06, R.raw.guitar09};
     private int[] bassFileNames = {R.raw.bass01, R.raw.bass03, R.raw.bass05, R.raw.bass10};
     private int[] sounds = new int[5];
+    private int[] drums = new int[4];
+    private int[] waza1s = new int[4];
+    private int[] waza2s = new int[4];
+    private int[] specials = new int[4];
+    private int[] pianos = new int[4];
+    private int[] guitars = new int[4];
+    private int[] basses = new int[4];
 
     private int bgm = 0;
     private int kubifuriSound = 0;
@@ -66,9 +73,9 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
-    private int[] backgroundMusicRefs = {R.raw.first_highhat, R.raw.sakanakushon2};
+    private int[] backgroundMusicRefs = {R.raw.first_highhat, R.raw.sakanakushon5};
     private int[] backgroundMusics = new int[backgroundMusicRefs.length];
-    private ImageView[] effectViews = new ImageView[4];
+    private ImageView[] effectViews = new ImageView[16];
 
     private MemeLib memeLib;
 
@@ -156,14 +163,38 @@ public class LiveViewActivity extends AppCompatActivity {
         countDownLayout = findViewById(R.id.layout_countdown_container);
         countDownText = findViewById(R.id.text_countdown);
 
-        effectViews[0] = findViewById(R.id.effect_image_0);
-        effectViews[1] = findViewById(R.id.effect_image_1);
-        effectViews[2] = findViewById(R.id.effect_image_2);
-        effectViews[3] = findViewById(R.id.effect_image_3);
-        //effectViews[0].setVisibility(View.GONE);
-        //effectViews[1].setVisibility(View.GONE);
-        //effectViews[2].setVisibility(View.GONE);
-        //effectViews[3].setVisibility(View.GONE);
+        effectViews[0] = findViewById(R.id.effect1_image_0);
+        effectViews[1] = findViewById(R.id.effect1_image_1);
+        effectViews[2] = findViewById(R.id.effect1_image_2);
+        effectViews[3] = findViewById(R.id.effect1_image_3);
+        effectViews[4] = findViewById(R.id.effect2_image_0);
+        effectViews[5] = findViewById(R.id.effect2_image_1);
+        effectViews[6] = findViewById(R.id.effect2_image_2);
+        effectViews[7] = findViewById(R.id.effect2_image_3);
+        effectViews[8] = findViewById(R.id.effect3_image_0);
+        effectViews[9] = findViewById(R.id.effect3_image_1);
+        effectViews[10] = findViewById(R.id.effect3_image_2);
+        effectViews[11] = findViewById(R.id.effect3_image_3);
+        effectViews[12] = findViewById(R.id.effect4_image_0);
+        effectViews[13] = findViewById(R.id.effect4_image_1);
+        effectViews[14] = findViewById(R.id.effect4_image_2);
+        effectViews[15] = findViewById(R.id.effect4_image_3);
+        effectViews[0].setVisibility(View.INVISIBLE);
+        effectViews[1].setVisibility(View.INVISIBLE);
+        effectViews[2].setVisibility(View.INVISIBLE);
+        effectViews[3].setVisibility(View.INVISIBLE);
+        effectViews[4] = findViewById(View.INVISIBLE);
+        effectViews[5] = findViewById(View.INVISIBLE);
+        effectViews[6] = findViewById(View.INVISIBLE);
+        effectViews[7] = findViewById(View.INVISIBLE);
+        effectViews[8] = findViewById(View.INVISIBLE);
+        effectViews[9] = findViewById(View.INVISIBLE);
+        effectViews[10] = findViewById(View.INVISIBLE);
+        effectViews[11] = findViewById(View.INVISIBLE);
+        effectViews[12] = findViewById(View.INVISIBLE);
+        effectViews[13] = findViewById(View.INVISIBLE);
+        effectViews[14] = findViewById(View.INVISIBLE);
+        effectViews[15] = findViewById(View.INVISIBLE);
     }
 
     private void changeViewStatus(boolean connected) {
@@ -192,7 +223,8 @@ public class LiveViewActivity extends AppCompatActivity {
         // for blink
         //Log.d("LiveViewActivity", "Blink Speed:" + d.getBlinkSpeed());
         if (d.getBlinkSpeed() > 0) {
-            blink();
+            setEffect(10);
+
         }
         int dataUp = d.getEyeMoveUp();
         int dataDown = d.getEyeMoveDown();
@@ -202,36 +234,56 @@ public class LiveViewActivity extends AppCompatActivity {
         float dataPitch = d.getPitch();
         float dataYaw = d.getYaw();
         float dataAccZ = d.getAccZ();
+        if (d.getBlinkStrength() > 200){
+            setEffect(11);
+        }
+        if (d.getBlinkStrength() < 50){
+            setEffect(12);
+        }
         if (dataUp > 1){
             Log.d("error1", "up");
             //soundPool.play(sounds[0], 1.0f, 1.0f, 0, 0, 1);
-            playMusic(sounds[0], 0, 1);
+            playMusic(0, 1);
             setEffect(3);
         }
         if (dataDown > 1){
             Log.d("error1", "down");
             //soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
-            playMusic(sounds[1], 0, 1);
+            playMusic(1, 1);
             setEffect(1);
         }
         if (dataLeft > 1){
             Log.d("error1", "left");
             //soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
-            playMusic(sounds[2], 0, 1);
+            playMusic(2, 1);
             setEffect(2);
         }
         if (dataRight > 1){
             Log.d("error1", "right");
             //soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
-            playMusic(sounds[3], 0, 1);
+            playMusic(3, 1);
             setEffect(0);
         }
-        if (dataAccZ > -6.0f || dataAccZ < -26.0f){
-            //playMusic(sounds[3], 0);
-        } else if (dataRoll > 30.0f || dataRoll < -30.0f){
-            //playMusic(sounds[3], 0);
-        } else if (dataPitch > 30.0f || dataPitch < -30.0f){
-            //playMusic(sounds[2], 0);
+        if (dataAccZ > -6.0f){
+            setEffect(8);
+        } else if (dataAccZ < -26.0f){
+            setEffect(9);
+        } else if (dataPitch > 50.0f){
+            setEffect(13);
+            playMusic(0, 2);
+        } else if (dataRoll > 30.0f){
+            setEffect(4);
+            playMusic(1, 2);
+        } else if (dataPitch < -50.0f){
+            setEffect(14);
+            playMusic(2, 2);
+        } else if (dataRoll < -30.0f){
+            setEffect(6);
+            playMusic(3, 2);
+        } else if (dataPitch > 30.0f){
+            setEffect(7);
+        } else if (dataPitch < -30.0f){
+            setEffect(5);
         }
 
         //Log.d("error1", "pitch: " + dataPitch);
@@ -242,10 +294,6 @@ public class LiveViewActivity extends AppCompatActivity {
         // for body (Y axis rotation)
         double radian = Math.atan2(d.getAccX(), d.getAccZ());
         rotate(Math.toDegrees(-radian)); // for mirroring display(radian x -1)
-    }
-
-    private void blink(){
-        //目を瞑ったとき
     }
 
     private void rotate(double degree) {
@@ -268,6 +316,15 @@ public class LiveViewActivity extends AppCompatActivity {
         sounds[3] = soundPool.load(this, R.raw.music5, 1);
         backgroundMusics[0] = soundPool.load(this, backgroundMusicRefs[0], 1);
         backgroundMusics[1] = soundPool.load(this, backgroundMusicRefs[1], 1);
+        for (int i = 0; i < 4; i++){
+            drums[i] = soundPool.load(this, drumMusicFileRefs[i], 1);
+            waza1s[i] = soundPool.load(this, waza1FileNames[i], 1);
+            waza2s[i] = soundPool.load(this, waza2FileNames[i], 1);
+            specials[i] = soundPool.load(this, specialFileNames[i], 1);
+            pianos[i] = soundPool.load(this, pianoFileNames[i], 1);
+            guitars[i] = soundPool.load(this, guitarFileNames[i], 1);
+            basses[i] = soundPool.load(this, bassFileNames[i], 1);
+        }
     }
 
     public void addCameraFragment(final int viewWidth, final int viewHeight, int containerViewId){
@@ -311,8 +368,7 @@ public class LiveViewActivity extends AppCompatActivity {
     }
 
     private void startBGM(){
-        soundPool.play(backgroundMusics[0],1.0f, 1.0f, 1, -1, 1);
-        //playMusic(backgroundMusics[bgm], 1);
+        soundPool.play(backgroundMusics[bgm],1.0f, 1.0f, 1, -1, 1);
     }
 
     private void startCountDown(){
@@ -348,10 +404,42 @@ public class LiveViewActivity extends AppCompatActivity {
             int target = 0;
             int priority = 0;
             switch (type){
-                cas
+                case 1:
+                    priority = 0;
+                    switch (shisenSound){
+                        case 0:
+                            target = pianos[direction];
+                            break;
+                        case 1:
+                            target = guitars[direction];
+                            break;
+                        case 2:
+                            target = basses[direction];
+                            break;
+                    }
+                    break;
+                case 2:
+                    priority = 0;
+                    switch (kubifuriSound){
+                        case 0:
+                            target = drums[direction];
+                            break;
+                        case 1:
+                            target = waza1s[direction];
+                            break;
+                        case 2:
+                            target = waza2s[direction];
+                            break;
+                        case 3:
+                            target = specials[direction];
+                            break;
+                    }
+                    break;
+                case 3:
+                    break;
             }
 
-            soundPool.play(musicFile,  1.0f, 1.0f, priority, 0, 1);
+            soundPool.play(target, 1.0f, 1.0f, priority, 0, 1);
             playingChecker = false;
             new Handler().postDelayed(new Runnable() {
                 @Override

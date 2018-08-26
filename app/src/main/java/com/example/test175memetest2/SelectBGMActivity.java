@@ -99,7 +99,7 @@ public class SelectBGMActivity extends AppCompatActivity{
                 .setMaxStreams(1)
                 .build();
         sounds[0] = soundPool.load(this, R.raw.first_highhat, 1);
-        sounds[1] = soundPool.load(this, R.raw.sakanakushon2, 1);
+        sounds[1] = soundPool.load(this, R.raw.sakanakushon5, 1);
     }
 
     private void displayCurrentBMGText(){
