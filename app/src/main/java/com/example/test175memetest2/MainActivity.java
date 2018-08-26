@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button, buttonConnect;
     private MemeLib memeLib;
 
-    private static final String APP_ID = "834048189444008";
-    private static final String APP_SECRET = "993ox4vgs4s0js8moi7yst37g6ipj3mj";
+    private static final String APP_ID = "";
+    private static final String APP_SECRET = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

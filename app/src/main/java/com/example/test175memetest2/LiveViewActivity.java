@@ -1,6 +1,7 @@
 package com.example.test175memetest2;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.media.AudioAttributes;
@@ -28,6 +29,7 @@ import com.jins_jp.meme.MemeLib;
 import com.jins_jp.meme.MemeRealtimeData;
 import com.jins_jp.meme.MemeRealtimeListener;
 
+import java.io.IOException;
 import java.util.List;
 
 import jp.ogwork.camerafragment.camera.CameraFragment;
@@ -44,7 +46,6 @@ public class LiveViewActivity extends AppCompatActivity {
     private VideoView blinkView;
     private FrameLayout bodyLayout, cameraLayout;
     private ImageView bodyImage;
-    private TextView statusLabel;
 
     private LinearLayout countDownLayout;
     private TextView countDownText;
@@ -64,9 +65,17 @@ public class LiveViewActivity extends AppCompatActivity {
     private int kubifuriSound = 0;
     private int shisenSound = 0;
     private boolean isPlayAllowed = false;
+    private boolean audioPlayingFlag = false;
+    private boolean playingChecker = true;
+
+    private MediaPlayer mediaPlayer;
 
     private int[] backgroundMusicRefs = {R.raw.tmga_drum1, R.raw.tmga_drum2};
     private int[] backgroundMusics = new int[backgroundMusicRefs.length];
+    private String[] backgroundMusicFileNames = {
+            "tmga_drum1.m4a",
+            "tmga_drum2.m4a"
+    };
 
     private MemeLib memeLib;
 
@@ -109,6 +118,12 @@ public class LiveViewActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause(){
+        super.onPause();
+        soundPool.release();
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
@@ -144,8 +159,6 @@ public class LiveViewActivity extends AppCompatActivity {
 
         bodyImage = (ImageView)findViewById(R.id.body_image);
 
-        statusLabel = (TextView)findViewById(R.id.status_label);
-
 
         changeViewStatus(memeLib.isConnected());
         cameraLayout = findViewById(R.id.framelayout_camera);
@@ -169,15 +182,10 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private void changeViewStatus(boolean connected) {
         if (connected) {
-            statusLabel.setText(R.string.connected);
-            statusLabel.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
-
             blinkLayout.setAlpha(1.0f);
             blinkView.setVisibility(View.VISIBLE);
             bodyLayout.setAlpha(1.0f);
         } else {
-            statusLabel.setText(R.string.not_connected);
-            statusLabel.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
 
             blinkImage.setVisibility(View.VISIBLE);
             blinkLayout.setAlpha(0.2f);
@@ -219,27 +227,29 @@ public class LiveViewActivity extends AppCompatActivity {
         if (dataUp > 2){
             Log.d("error1", "up");
             //soundPool.play(sounds[0], 1.0f, 1.0f, 0, 0, 1);
+            //playMusic(sounds[0], 0);
         }
         if (dataDown > 2){
             Log.d("error1", "down");
             //soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
+            //playMusic(sounds[1], 0);
         }
         if (dataLeft > 2){
             Log.d("error1", "left");
             //soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
+            //playMusic(sounds[2], 0);
         }
         if (dataRight > 2){
             Log.d("error1", "right");
             //soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
+            //playMusic(sounds[3], 0);
         }
         if (dataAccZ > -6.0f || dataAccZ < -26.0f){
-            soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
-        } else if (dataRoll > 40.0f || dataRoll < -40.0f){
-            soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
-        } else if (dataPitch > 40.0f || dataPitch < -40.0f){
-            soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
-        } else if (dataYaw > 40.0f || dataYaw < -40.0f){
-            soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
+            playMusic(sounds[3], 0);
+        } else if (dataRoll > 30.0f || dataRoll < -30.0f){
+            playMusic(sounds[3], 0);
+        } else if (dataPitch > 30.0f || dataPitch < -30.0f){
+            playMusic(sounds[2], 0);
         }
 
         //Log.d("error1", "pitch: " + dataPitch);
@@ -276,7 +286,7 @@ public class LiveViewActivity extends AppCompatActivity {
                 .build();
         soundPool = new SoundPool.Builder()
                 .setAudioAttributes(audioAttributes)
-                .setMaxStreams(3)
+                .setMaxStreams(10)
                 .build();
         sounds[0] = soundPool.load(this, R.raw.music2, 1);
         sounds[1] = soundPool.load(this, R.raw.music3, 1);
@@ -327,7 +337,7 @@ public class LiveViewActivity extends AppCompatActivity {
     }
 
     private void startBGM(){
-        soundPool.play(backgroundMusics[bgm],  1.0f, 1.0f, 0, 0, 1);
+        playMusic(backgroundMusics[bgm], 1);
     }
 
     private void startCountDown(){
@@ -355,5 +365,22 @@ public class LiveViewActivity extends AppCompatActivity {
                 startBGM();
             }
         }, 3000);
+    }
+
+    private void playMusic(int musicFile, int priority){
+        if (playingChecker){
+            soundPool.play(musicFile,  1.0f, 1.0f, priority, 0, 1);
+            playingChecker = false;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    playingChecker = true;
+                }
+            }, 500);
+        }
+    }
+
+    private void makeToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

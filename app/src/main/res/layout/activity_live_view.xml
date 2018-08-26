@@ -67,24 +67,6 @@
                 />
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/status_label"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:gravity="center"
-            android:text="接続されていません"
-            android:textSize="10sp"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
-            />
-
-        <Button
-            android:id="@+id/connect_button"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:background="@drawable/connect_button"
-            />
-
     </LinearLayout>
 
     <LinearLayout

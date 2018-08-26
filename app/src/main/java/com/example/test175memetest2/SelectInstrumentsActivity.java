@@ -37,6 +37,7 @@ public class SelectInstrumentsActivity extends AppCompatActivity {
         setContentView(R.layout.select_instruments_activity);
         initView();
         getPresetInstrument();
+        setFirstInstrument();
     }
 
     private void initView(){
@@ -164,6 +165,16 @@ public class SelectInstrumentsActivity extends AppCompatActivity {
     private void showCorrectInstrument(int target){
         for (int i = 0; i < instrumentWrapper.length; i++){
             if (i == target) {
+                instrumentWrapper[i].setVisibility(View.VISIBLE);
+                continue;
+            }
+            instrumentWrapper[i].setVisibility(View.GONE);
+        }
+    }
+
+    private void setFirstInstrument(){
+        for (int i = 0; i < instrumentWrapper.length; i++){
+            if (i == currentKubifuriInstrument) {
                 instrumentWrapper[i].setVisibility(View.VISIBLE);
                 continue;
             }
