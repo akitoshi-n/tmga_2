@@ -35,9 +35,9 @@ public class CheckSettingsActivity extends AppCompatActivity {
     }
 
     private void initView(){
-        textViewCheck0 = findViewById(R.id.textview_with_check_0);
-        textViewCheck1 = findViewById(R.id.textview_with_check_1);
-        textViewCheck2 = findViewById(R.id.textview_with_check_2);
+        textViewCheck0 = findViewById(R.id.bgm_selected);
+        textViewCheck1 = findViewById(R.id.swing_selected);
+        textViewCheck2 = findViewById(R.id.look_selected);
         buttonStart = findViewById(R.id.button_start_play);
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,9 +57,9 @@ public class CheckSettingsActivity extends AppCompatActivity {
 
     //テキストビューに文字を指定
     private void setToTextView(){
-        String s0 = "BGM: " + bgms[bgm];
-        String s1 = "首振り: " + kubifuriSounds[kubifuriSound];
-        String s2 = "視線: " + shisenSounds[shisenSound];
+        String s0 = bgms[bgm];
+        String s1 = kubifuriSounds[kubifuriSound];
+        String s2 = shisenSounds[shisenSound];
         textViewCheck0.setText(s0);
         textViewCheck1.setText(s1);
         textViewCheck2.setText(s2);
