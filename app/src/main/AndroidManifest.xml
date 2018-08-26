@@ -29,7 +29,8 @@
         <activity android:name=".SelectInstrumentsActivity" android:screenOrientation="portrait" />
         <activity android:name=".CheckSettingsActivity" android:screenOrientation="portrait" />
         <activity android:name=".LiveViewActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ConnectActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ConnectActivity" android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

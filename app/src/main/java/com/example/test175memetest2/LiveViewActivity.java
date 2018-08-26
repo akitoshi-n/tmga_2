@@ -8,14 +8,17 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -42,7 +45,9 @@ public class LiveViewActivity extends AppCompatActivity {
     private FrameLayout bodyLayout, cameraLayout;
     private ImageView bodyImage;
     private TextView statusLabel;
-    private Button connectButton;
+
+    private LinearLayout countDownLayout;
+    private TextView countDownText;
 
     private SoundPool soundPool;
     private String[] audioFileNames = {"music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music.mp3"};
@@ -58,6 +63,10 @@ public class LiveViewActivity extends AppCompatActivity {
     private int bgm = 0;
     private int kubifuriSound = 0;
     private int shisenSound = 0;
+    private boolean isPlayAllowed = false;
+
+    private int[] backgroundMusicRefs = {R.raw.tmga_drum1, R.raw.tmga_drum2};
+    private int[] backgroundMusics = new int[backgroundMusicRefs.length];
 
     private MemeLib memeLib;
 
@@ -96,6 +105,7 @@ public class LiveViewActivity extends AppCompatActivity {
         init(savedInstanceState);
         soundPool();
         getValues();
+        startCountDown();
     }
 
     @Override
@@ -136,18 +146,6 @@ public class LiveViewActivity extends AppCompatActivity {
 
         statusLabel = (TextView)findViewById(R.id.status_label);
 
-        connectButton = (Button)findViewById(R.id.connect_button);
-        connectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (memeLib.isConnected()) {
-                    memeLib.disconnect();
-                } else {
-                    Intent intent = new Intent(LiveViewActivity.this, ConnectActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
 
         changeViewStatus(memeLib.isConnected());
         cameraLayout = findViewById(R.id.framelayout_camera);
@@ -165,6 +163,8 @@ public class LiveViewActivity extends AppCompatActivity {
                 }
             });
         }
+        countDownLayout = findViewById(R.id.layout_countdown_container);
+        countDownText = findViewById(R.id.text_countdown);
     }
 
     private void changeViewStatus(boolean connected) {
@@ -172,16 +172,12 @@ public class LiveViewActivity extends AppCompatActivity {
             statusLabel.setText(R.string.connected);
             statusLabel.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
 
-            connectButton.setBackground(ContextCompat.getDrawable(this, R.drawable.disconnect_button));
-
             blinkLayout.setAlpha(1.0f);
             blinkView.setVisibility(View.VISIBLE);
             bodyLayout.setAlpha(1.0f);
         } else {
             statusLabel.setText(R.string.not_connected);
             statusLabel.setBackgroundColor(ContextCompat.getColor(this, R.color.red));
-
-            connectButton.setBackground(ContextCompat.getDrawable(this, R.drawable.connect_button));
 
             blinkImage.setVisibility(View.VISIBLE);
             blinkLayout.setAlpha(0.2f);
@@ -280,12 +276,14 @@ public class LiveViewActivity extends AppCompatActivity {
                 .build();
         soundPool = new SoundPool.Builder()
                 .setAudioAttributes(audioAttributes)
-                .setMaxStreams(2)
+                .setMaxStreams(3)
                 .build();
         sounds[0] = soundPool.load(this, R.raw.music2, 1);
         sounds[1] = soundPool.load(this, R.raw.music3, 1);
         sounds[2] = soundPool.load(this, R.raw.music4, 1);
         sounds[3] = soundPool.load(this, R.raw.music5, 1);
+        backgroundMusics[0] = soundPool.load(this, backgroundMusicRefs[0], 1);
+        backgroundMusics[1] = soundPool.load(this, backgroundMusicRefs[1], 1);
     }
 
     public void addCameraFragment(final int viewWidth, final int viewHeight, int containerViewId){
@@ -326,5 +324,36 @@ public class LiveViewActivity extends AppCompatActivity {
         bgm = myPreferencesActivity.getCurrentBGM(LiveViewActivity.this);
         kubifuriSound = myPreferencesActivity.getKubifuriInstrument(LiveViewActivity.this);
         shisenSound = myPreferencesActivity.getShisenInstrument(LiveViewActivity.this);
+    }
+
+    private void startBGM(){
+        soundPool.play(backgroundMusics[bgm],  1.0f, 1.0f, 0, 0, 1);
+    }
+
+    private void startCountDown(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                countDownText.setText("2");
+            }
+        }, 1000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                countDownText.setText("1");
+            }
+        }, 2000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                countDownText.setText("0");
+                AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
+                animation.setDuration(500);
+                animation.setFillAfter(true);
+                countDownLayout.startAnimation(animation);
+                isPlayAllowed = true;
+                startBGM();
+            }
+        }, 3000);
     }
 }
