@@ -86,16 +86,15 @@
                 android:background="#00ffffff"
                 android:textColor="#ff000000"/>
 
-
         </LinearLayout>
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="200dp"
-        android:layout_height="240dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="130dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -107,9 +106,9 @@
 
             <!-- ドラムイラスト -->
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:background="@color/red"/>
+                android:src="@drawable/drum"
+                android:layout_width="180dp"
+                android:layout_height="180dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,9 +129,9 @@
 
             <!-- 技系①イラスト -->
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:background="@color/red"/>
+                android:src="@drawable/punch"
+                android:layout_width="180dp"
+                android:layout_height="180dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,9 +152,9 @@
 
             <!-- 技系②イラスト -->
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:background="@color/red"/>
+                android:src="@drawable/original_sord_png"
+                android:layout_width="180dp"
+                android:layout_height="180dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,9 +175,9 @@
 
             <!-- 特殊系イラスト -->
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:background="@color/red"/>
+                android:src="@drawable/unicorn"
+                android:layout_width="180dp"
+                android:layout_height="180dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -264,7 +263,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="240dp">
 
         <ImageView
             android:id="@+id/select_left"
