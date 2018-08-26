@@ -25,8 +25,6 @@ public class SelectBGMActivity extends AppCompatActivity{
     private int[] sounds = new int[2];
     private TextView textBGM0, textBGM1, textBGM2;
 
-    private int[] drumMusicFileRefs = {R.raw.dram_cymbal, R.raw.dram_snare, R.raw.dram_hihat, R.raw.dram_snare};
-
     private MyPreferencesActivity myPreferencesActivity = new MyPreferencesActivity();
 
 

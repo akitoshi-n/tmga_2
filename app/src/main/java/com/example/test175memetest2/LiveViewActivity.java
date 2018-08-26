@@ -41,24 +41,21 @@ public class LiveViewActivity extends AppCompatActivity {
     private static final String APP_ID = "";
     private static final String APP_SECRET = "";
 
-    private FrameLayout blinkLayout;
-    private ImageView blinkImage;
-    private VideoView blinkView;
-    private FrameLayout bodyLayout, cameraLayout;
-    private ImageView bodyImage;
+    private FrameLayout cameraLayout;
 
     private LinearLayout countDownLayout;
     private TextView countDownText;
 
     private SoundPool soundPool;
     private String[] audioFileNames = {"music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music.mp3"};
-    private String[] dramFileNames = {"drum_cymbal.wav", "drum_snare.wav", "drum_hihat.wav", "drum_snare.wav"};
-    private String[] waza1FileNames = {"waza_aura.mp3", "waza_punch_high.mp3", "waza_highspeed.mp3", "waza_whip_attack.mp3"};
-    private String[] waza2FileNames = {"waza_sword_clash.mp3", "waza_knife_stab.mp3", "waza_sword_gesture.mp3", "waza_katana_slash.mp3"};
-    private String[] specialFileNames = {"sp_shine.mp3", "sp_pocopoco.mp3", "sp_tin.mp3", "sp_touch.mp3"};
-    private String[] pianoFileNames = {"piano1_1do.wav", "piano1_2re.wav", "piano1_3mi.wav", "piano1_4fa.wav"};
-    private String[] guitarFileNames = {"guitar01.wav", "guitar04.wav", "guitar06.wav", "guitar09.wav"};
-    private String[] bassFileNames = {"bass01.wav", "bass03.wav", "bass05.wav", "bass10.wav"};
+    private int[] drumMusicFileRefs = {R.raw.dram_cymbal, R.raw.dram_snare, R.raw.dram_hihat, R.raw.dram_snare};
+    //private String[] dramFileNames = {"drum_cymbal.wav", "drum_snare.wav", "drum_hihat.wav", "drum_snare.wav"}; ↑修正後
+    //private String[] waza1FileNames = {"waza_aura.mp3", "waza_punch_high.mp3", "waza_highspeed.mp3", "waza_whip_attack.mp3"};
+    //private String[] waza2FileNames = {"waza_sword_clash.mp3", "waza_knife_stab.mp3", "waza_sword_gesture.mp3", "waza_katana_slash.mp3"};
+    //private String[] specialFileNames = {"sp_shine.mp3", "sp_pocopoco.mp3", "sp_tin.mp3", "sp_touch.mp3"};
+    //private String[] pianoFileNames = {"piano1_1do.wav", "piano1_2re.wav", "piano1_3mi.wav", "piano1_4fa.wav"};
+    //private String[] guitarFileNames = {"guitar01.wav", "guitar04.wav", "guitar06.wav", "guitar09.wav"};
+    //private String[] bassFileNames = {"bass01.wav", "bass03.wav", "bass05.wav", "bass10.wav"};
     private int[] sounds = new int[5];
 
     private int bgm = 0;
@@ -72,10 +69,6 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private int[] backgroundMusicRefs = {R.raw.tmga_drum1, R.raw.tmga_drum2};
     private int[] backgroundMusics = new int[backgroundMusicRefs.length];
-    private String[] backgroundMusicFileNames = {
-            "tmga_drum1.m4a",
-            "tmga_drum2.m4a"
-    };
 
     private MemeLib memeLib;
 
@@ -143,22 +136,6 @@ public class LiveViewActivity extends AppCompatActivity {
         MemeLib.setAppClientID(getApplicationContext(), APP_ID, APP_SECRET);
         memeLib = MemeLib.getInstance();
 
-        blinkLayout = (FrameLayout)findViewById(R.id.blink_layout);
-        blinkImage = (ImageView)findViewById(R.id.blink_image);
-        blinkView = (VideoView)findViewById(R.id.blink_view);
-        blinkView.setZOrderOnTop(true);
-        blinkView.setVideoPath("android.resource://" + this.getPackageName() + "/" + R.raw.blink);
-        blinkView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.seekTo(0);
-            }
-        });
-
-        bodyLayout = (FrameLayout)findViewById(R.id.body_layout);
-
-        bodyImage = (ImageView)findViewById(R.id.body_image);
-
 
         changeViewStatus(memeLib.isConnected());
         cameraLayout = findViewById(R.id.framelayout_camera);
@@ -182,15 +159,9 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private void changeViewStatus(boolean connected) {
         if (connected) {
-            blinkLayout.setAlpha(1.0f);
-            blinkView.setVisibility(View.VISIBLE);
-            bodyLayout.setAlpha(1.0f);
+
         } else {
 
-            blinkImage.setVisibility(View.VISIBLE);
-            blinkLayout.setAlpha(0.2f);
-            blinkView.setVisibility(View.INVISIBLE);
-            bodyLayout.setAlpha(0.2f);
         }
     }
 
@@ -212,8 +183,6 @@ public class LiveViewActivity extends AppCompatActivity {
         // for blink
         //Log.d("LiveViewActivity", "Blink Speed:" + d.getBlinkSpeed());
         if (d.getBlinkSpeed() > 0) {
-            blinkImage.setVisibility(View.INVISIBLE);
-
             blink();
         }
         int dataUp = d.getEyeMoveUp();
@@ -263,19 +232,11 @@ public class LiveViewActivity extends AppCompatActivity {
     }
 
     private void blink(){
-        blinkView.seekTo(0);
-        blinkView.start();
+        //目を瞑ったとき
     }
 
     private void rotate(double degree) {
-        int width = bodyImage.getDrawable().getBounds().width();
-        int height = bodyImage.getDrawable().getBounds().height();
 
-        Matrix matrix = new Matrix();
-        bodyImage.setScaleType(ImageView.ScaleType.MATRIX);
-        matrix.postRotate((float)degree, width/2, height/2);
-        matrix.postScale(0.5f, 0.5f);
-        bodyImage.setImageMatrix(matrix);
     }
 
     private void soundPool(){
@@ -378,6 +339,10 @@ public class LiveViewActivity extends AppCompatActivity {
                 }
             }, 500);
         }
+    }
+
+    private void setEffect(int direction){
+
     }
 
     private void makeToast(String text){

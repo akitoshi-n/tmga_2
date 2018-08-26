@@ -15,76 +15,43 @@
 
     </FrameLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/blink_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5">
+        <ImageView
+            android:id="@+id/effect_image_0"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/black"/>
 
-            <VideoView
-                android:id="@+id/blink_view"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_width="220dp"
-                />
+        <ImageView
+            android:id="@+id/effect_image_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/black"/>
 
-            <ImageView
-                android:id="@+id/blink_image"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_width="220dp"
-                android:src="@drawable/blink_00000"
-                />
+        <ImageView
+            android:id="@+id/effect_image_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@color/black"/>
 
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/effect_image_3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/black"/>
 
-        <FrameLayout
-            android:id="@+id/body_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6">
-
-            <ImageView
-                android:src="@drawable/body_vector_bg"
-                android:layout_width="220dp"
-                android:layout_height="220dp"
-                android:layout_gravity="center"
-                />
-
-            <ImageView
-                android:id="@+id/body_image"
-                android:src="@drawable/body_vector"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                />
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_countdown_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="#bb000000">
-
-        <TextView
-            android:id="@+id/text_countdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"
-            android:textColor="@color/white"
-            android:textSize="25sp"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
