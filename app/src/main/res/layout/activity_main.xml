@@ -40,12 +40,19 @@
         android:drawableRight="@drawable/engel_emoji"/>
 
     <Button
-        android:layout_below="@+id/button_start"
         android:id="@+id/button_connect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="接続する"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="JINS MEMEに接続する"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/frame_button_transparent_bold"
+        android:layout_alignParentBottom="true"/>
+
+
 
 </RelativeLayout>
