@@ -48,7 +48,7 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private SoundPool soundPool;
     private String[] audioFileNames = {"music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music.mp3"};
-    private int[] drumMusicFileRefs = {R.raw.dram_cymbal, R.raw.dram_snare, R.raw.dram_hihat, R.raw.dram_snare};
+    private int[] drumMusicFileRefs = {R.raw.drum_cymbal, R.raw.drum_snare, R.raw.drum_hihat, R.raw.drum_snare};
     private int[] waza1FileNames = {R.raw.waza_aura, R.raw.waza_punch_high, R.raw.waza_highspeed, R.raw.waza_whip_attack};
     private int[] waza2FileNames = {R.raw.waza_sword_clash, R.raw.waza_knife_stab, R.raw.waza_sword_gesture, R.raw.waza_katana_slash};
     private int[] specialFileNames = {R.raw.sp_shine, R.raw.sp_pocopoco, R.raw.sp_tin, R.raw.sp_touch};
@@ -66,8 +66,9 @@ public class LiveViewActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
-    private int[] backgroundMusicRefs = {R.raw.first_highhat R.raw.sakanakushon2};
+    private int[] backgroundMusicRefs = {R.raw.first_highhat, R.raw.sakanakushon2};
     private int[] backgroundMusics = new int[backgroundMusicRefs.length];
+    private ImageView[] effectViews = new ImageView[4];
 
     private MemeLib memeLib;
 
@@ -154,6 +155,15 @@ public class LiveViewActivity extends AppCompatActivity {
         }
         countDownLayout = findViewById(R.id.layout_countdown_container);
         countDownText = findViewById(R.id.text_countdown);
+
+        effectViews[0] = findViewById(R.id.effect_image_0);
+        effectViews[1] = findViewById(R.id.effect_image_1);
+        effectViews[2] = findViewById(R.id.effect_image_2);
+        effectViews[3] = findViewById(R.id.effect_image_3);
+        //effectViews[0].setVisibility(View.GONE);
+        //effectViews[1].setVisibility(View.GONE);
+        //effectViews[2].setVisibility(View.GONE);
+        //effectViews[3].setVisibility(View.GONE);
     }
 
     private void changeViewStatus(boolean connected) {
@@ -192,32 +202,36 @@ public class LiveViewActivity extends AppCompatActivity {
         float dataPitch = d.getPitch();
         float dataYaw = d.getYaw();
         float dataAccZ = d.getAccZ();
-        if (dataUp > 2){
+        if (dataUp > 1){
             Log.d("error1", "up");
             //soundPool.play(sounds[0], 1.0f, 1.0f, 0, 0, 1);
-            //playMusic(sounds[0], 0);
+            playMusic(sounds[0], 0, 1);
+            setEffect(3);
         }
-        if (dataDown > 2){
+        if (dataDown > 1){
             Log.d("error1", "down");
             //soundPool.play(sounds[1], 1.0f, 1.0f, 0, 0, 1);
-            //playMusic(sounds[1], 0);
+            playMusic(sounds[1], 0, 1);
+            setEffect(1);
         }
-        if (dataLeft > 2){
+        if (dataLeft > 1){
             Log.d("error1", "left");
             //soundPool.play(sounds[2], 1.0f, 1.0f, 0, 0, 1);
-            //playMusic(sounds[2], 0);
+            playMusic(sounds[2], 0, 1);
+            setEffect(2);
         }
-        if (dataRight > 2){
+        if (dataRight > 1){
             Log.d("error1", "right");
             //soundPool.play(sounds[3], 1.0f, 1.0f, 0, 0, 1);
-            //playMusic(sounds[3], 0);
+            playMusic(sounds[3], 0, 1);
+            setEffect(0);
         }
         if (dataAccZ > -6.0f || dataAccZ < -26.0f){
-            playMusic(sounds[3], 0);
+            //playMusic(sounds[3], 0);
         } else if (dataRoll > 30.0f || dataRoll < -30.0f){
-            playMusic(sounds[3], 0);
+            //playMusic(sounds[3], 0);
         } else if (dataPitch > 30.0f || dataPitch < -30.0f){
-            playMusic(sounds[2], 0);
+            //playMusic(sounds[2], 0);
         }
 
         //Log.d("error1", "pitch: " + dataPitch);
@@ -297,7 +311,8 @@ public class LiveViewActivity extends AppCompatActivity {
     }
 
     private void startBGM(){
-        playMusic(backgroundMusics[bgm], 1);
+        soundPool.play(backgroundMusics[0],1.0f, 1.0f, 1, -1, 1);
+        //playMusic(backgroundMusics[bgm], 1);
     }
 
     private void startCountDown(){
@@ -327,8 +342,15 @@ public class LiveViewActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void playMusic(int musicFile, int priority){
+    //視点移動: 1
+    private void playMusic(int direction, int type){
         if (playingChecker){
+            int target = 0;
+            int priority = 0;
+            switch (type){
+                cas
+            }
+
             soundPool.play(musicFile,  1.0f, 1.0f, priority, 0, 1);
             playingChecker = false;
             new Handler().postDelayed(new Runnable() {
@@ -341,7 +363,13 @@ public class LiveViewActivity extends AppCompatActivity {
     }
 
     private void setEffect(int direction){
-
+        effectViews[direction].setBackgroundResource(R.drawable.effect1);
+        effectViews[direction].setVisibility(View.VISIBLE);
+        AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
+        animation.setDuration(900);
+        animation.setFillAfter(false);
+        effectViews[direction].startAnimation(animation);
+        effectViews[direction].setVisibility(View.GONE);
     }
 
     private void makeToast(String text){
